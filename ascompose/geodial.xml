@@ -1,0 +1,20 @@
+<set var="tile_size" val=256/>
+
+<tile id=receiver tint="#ff398ecd"><hsv value_offset=40><scale width="$tile_size*2/3"><img src="receiver.png"/></scale></hsv></tile>
+<scale id=globe height=$tile_size-$receiver.height width=proportional><img src="globe.png"/></scale>
+<scale id=dialpad width=proportional height="$globe.height*2/3"><tile tint="#60777777"><img src="dialpad.jpg"/></tile></scale>
+<set var="globe_y" val="$tile_size-$globe.height"/>
+<set var="globe_x" val="($tile_size-$globe.width)/2"/>
+
+<composite id=icon>
+	<solid color="#00FFFFFF" width="$tile_size" height="$tile_size"/>
+	<recall y="$globe_y" x="$globe_x" srcid=globe/>
+	<recall y="$globe_y+($globe.height-$dialpad.height/2)" x="$globe_x+($globe.width-$dialpad.width/2)" srcid=dialpad/>
+	<recall y=5 x="($tile_size-$receiver.width)/2" srcid=receiver/>
+</composite>
+
+<save dst="geodial_256.png" format="png"><recall srcid=icon/></save>
+<save dst="geodial_144.png" format="png"><scale width=144 height=proportional><recall srcid=icon/></scale></save>
+<save dst="geodial_96.png" format="png"><scale width=96 height=proportional><recall srcid=icon/></scale></save>
+<save dst="geodial_72.png" format="png"><scale width=72 height=proportional><recall srcid=icon/></scale></save>
+<save dst="geodial_48.png" format="png"><scale width=48 height=proportional><recall srcid=icon/></scale></save>

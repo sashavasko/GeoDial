@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GeoDial</string>
+    <string name="chooser_title">Complete the call with &#8230;</string>
+    <string name="geo_chooser_title">Select location app</string>
+
+</resources>

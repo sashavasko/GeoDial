@@ -71,7 +71,7 @@ public class MainActivity extends Activity {
 
         	String number = (query != null && query.length() >= 9)? query.substring(2) : null;
         	if (number != null) {
-        		number = number.replaceAll("[xp]", new String(new char[]{PhoneNumberUtils.PAUSE,PhoneNumberUtils.PAUSE}));
+        		number = number.replaceAll("[xp]|[cp]", new String(new char[]{PhoneNumberUtils.PAUSE,PhoneNumberUtils.PAUSE}));
         		number = number.replaceAll("[w]", Character.toString(PhoneNumberUtils.WAIT));
         		if (data.toString().contains("#"))
         			number += "#";

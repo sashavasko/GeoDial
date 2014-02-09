@@ -86,11 +86,11 @@ public class MainActivity extends Activity {
 		PackageManager packageManager = getPackageManager();
 		List<ResolveInfo> activities = packageManager.queryIntentActivities(intent, 0);
 		boolean isIntentSafe = activities.size() > 0;
-		if (Log.isLoggable(TAG, Log.DEBUG))
+		if (BuildConfig.DEBUG)
 			Log.d(TAG, "Intent can be handled by " + activities.size() + " activities");  
 		if (isIntentSafe) {
 			startActivity(Intent.createChooser(intent, title));
-		}else if (Log.isLoggable(TAG, Log.ERROR))
+		}else if (BuildConfig.DEBUG)
 			Log.e(TAG, "No apps are available.");
 	}
 	
@@ -135,7 +135,8 @@ public class MainActivity extends Activity {
     	packageManager = getPackageManager();
     	updateHandlers();
 		scriptViewAdapter = new DialScriptListAdapter(this);
-    	Log.d(TAG, "onCreate()");
+		if (BuildConfig.DEBUG)
+			Log.d(TAG, "onCreate()");
         if (display) {
         	if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) 
         		setContentView(R.layout.activity_main_landscape);
@@ -156,7 +157,8 @@ public class MainActivity extends Activity {
 	protected void handleIntent (Intent intent) {
         Uri data = intent.getData();
         if (data != null) {
-        	Log.d(TAG, "data = [" + data + "]");
+    		if (BuildConfig.DEBUG)
+    			Log.d(TAG, "data = [" + data + "]");
         	if (display) {
         		TextView tv = (TextView)findViewById (R.id.text_view);
         		tv.setText(data.toString());
@@ -169,7 +171,7 @@ public class MainActivity extends Activity {
         		}
 
         		String query = data.getEncodedQuery();
-        		if (Log.isLoggable(TAG, Log.DEBUG))
+        		if (BuildConfig.DEBUG)
         			Log.d(TAG, "query = [" + query + "]");
 
         		number = (query != null && query.length() > 2 )? query.substring(2) : null;
@@ -409,12 +411,14 @@ public class MainActivity extends Activity {
             if (convertView != null && position != selection)
             	siv.setActivated(false);
             siv.setItem(position, script.getItem(position));
-            Log.d(TAG,"getView("+position+"), selection == " + selection + ", view = " + siv );
+            if (BuildConfig.DEBUG)
+                Log.d(TAG,"getView("+position+"), selection == " + selection + ", view = " + siv );
             return siv;
         }
 
         public void setSelection(int index) {
-            Log.d(TAG,"setSelection("+index+"), last selection = " + selection );
+        	if (BuildConfig.DEBUG)
+        	    Log.d(TAG,"setSelection("+index+"), last selection = " + selection );
             if (index >= 0)
                 selection = index;
 
@@ -430,7 +434,8 @@ public class MainActivity extends Activity {
        	
             @Override
             public void run() {
-            	Log.d(TAG,"SelectionSetter: selection = " + selection );
+            	if (BuildConfig.DEBUG)
+            	    Log.d(TAG,"SelectionSetter: selection = " + selection );
             	int selPosition = getListItemViewPos(scriptView, selection);
             	int i = scriptView.getChildCount();
             	while (--i >= 0)
@@ -459,7 +464,8 @@ public class MainActivity extends Activity {
     }
     
     protected void updateScriptView(int selectedItem) {
-        Log.d(TAG,"updateScriptView("+selectedItem+")" );
+    	if (BuildConfig.DEBUG)
+    	    Log.d(TAG,"updateScriptView("+selectedItem+")" );
         if (selectedItem >= 0)
         	scriptViewAdapter.setSelection (selectedItem);
 

@@ -135,7 +135,8 @@ public class DialScript {
 			while (pos < maxPos){
 				int parsed = isNumberChar(str.codePointAt(pos))?
 								parseNumber(str, pos) : parsePause(str, pos);
-				Log.d(TAG, "string [" + str + "], pos = " + pos + " parsed = " + parsed);
+				if (BuildConfig.DEBUG)
+				    Log.d(TAG, "string [" + str + "], pos = " + pos + " parsed = " + parsed);
 				if (parsed == 0)
 					return;
 				pos += parsed;
@@ -179,7 +180,8 @@ public class DialScript {
 	}
 	
 	public int addPause(int selection, int duration) {
-		Log.d(TAG, "addPause "+duration);
+		if (BuildConfig.DEBUG)
+		    Log.d(TAG, "addPause "+duration);
 		Item item = getItem (selection);
 		if (item != null && !(item instanceof DialPause) && selection+1 <length() ) {
 			item = getItem (++selection);
@@ -198,7 +200,8 @@ public class DialScript {
 	}
 
 	protected int addNumber (String number) {
-		Log.d(TAG, "addNumber "+number);
+		if (BuildConfig.DEBUG)
+		    Log.d(TAG, "addNumber "+number);
 		if (!script.isEmpty() && !(getLast() instanceof DialPause))
 			addPause(1);
 		script.add(new DialNumber (number));
@@ -206,7 +209,8 @@ public class DialScript {
 	}
 
 	protected int addNumberFront (String number) {
-		Log.d(TAG, "addNumberFront "+number);
+		if (BuildConfig.DEBUG)
+		    Log.d(TAG, "addNumberFront "+number);
 		script.add(0, new DialNumber (number));
 		if (script.size() > 1 && !(script.get(1) instanceof DialPause))
 			addPause(0, 1);

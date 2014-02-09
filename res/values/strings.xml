@@ -4,5 +4,7 @@
     <string name="app_name">GeoDial</string>
     <string name="chooser_title">Complete the call with &#8230;</string>
     <string name="geo_chooser_title">Select location app</string>
+    <string name="number_to_dial_label">"Number to dial: "</string>
+    <string name="pause_title">PAUSE x</string>
 
 </resources>
